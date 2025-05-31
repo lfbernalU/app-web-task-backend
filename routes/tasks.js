@@ -18,9 +18,9 @@ router.get('/getTasks', async function(req, res) {
 
 router.post('/addTask', async function(req, res) {
     // Validate the request body
-    const { name, description } = req.body;
-    if (!name || !description) return res.status(400).json({ message: 'Name and description are required' });
-    const task = new Tasks({ name, description});
+    const { name, description, dueDate } = req.body;
+    if (!name || !description || !dueDate) return res.status(400).json({ message: 'Name and description are required' });
+    const task = new Tasks({ name, description, dueDate});
 
     // Save the task to the database
     try {
@@ -43,6 +43,8 @@ router.delete('/deleteTask/:id', async function(req, res) {
 
   try {
     const task = await Tasks.findByIdAndDelete(id);
+
+    if (!task) return res.status(404).json({ message: 'Task not found' });
 
     res.json({ message: 'Task deleted successfully' });
 

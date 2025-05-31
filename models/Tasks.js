@@ -8,7 +8,11 @@ const TasksSchema = new mongosee.Schema({
     description: {
         type: String,
         required: true
-    }
+    },
+    dueDate: {
+        type: Date,
+        required: true
+    },
 });
 
 module.exports = mongosee.model('Tasks', TasksSchema);

@@ -7,7 +7,12 @@ const GoalsSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true
+    },
+    dueDate: {
+        type: Date,
+        required: true
     }
+
 });
 
 module.exports = mongoose.model('Goals', GoalsSchema);

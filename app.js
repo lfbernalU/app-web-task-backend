@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -12,6 +13,16 @@ var task = require('./routes/tasks');
 var goals = require('./routes/goals');
 
 var app = express();
+
+const corsOptions = {
+  origin: 'http://localhost:5173', // Adjust this to your frontend URL
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204, // For legacy browser support
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
